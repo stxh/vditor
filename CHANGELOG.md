@@ -1,7 +1,18 @@
 ## Vditor change log
 
 ### 升级
+
+* 3.11
+  * 添加 options.preview.markdown.sup
+  * 添加 options.preview.markdown.sub
+  * 添加 options.customWysiwygToolbar
+  * 添加 options.upload.base64ToLink
+  * 添加 options.upload.xhr
+  * 添加 options.upload.cancel
+* 3.10
+  * 添加 options.unSelect
 * 3.9
+  * 添加 insertEmptyBlock
   * 添加 markmapRender 方法
   * 添加 SMILESRender 方法
   * 添加 insertMD 方法
@@ -19,8 +30,42 @@
 
 * [open issues](https://github.com/Vanessa219/vditor/issues)
 
-### v3.10.9 / 2025-01
+### v3.11.3 / 2025-09
 
+* [添加 `options.preview.markdown.sup/sub` 对上下标的配置](https://github.com/Vanessa219/vditor/pull/1853) `引入特性`
+* [升级 mermaid.js 11.6.0 至 11.11.0](https://github.com/Vanessa219/vditor/issues/1857) `改进功能`
+
+### v3.11.2 / 2025-09-02
+
+* [上标下标输入异常](https://github.com/Vanessa219/vditor/issues/1822) `修复缺陷`
+* [添加 `customWysiwygToolbar` 方法对 wysiwyg 模式下的工具栏进行自定义](https://github.com/Vanessa219/vditor/issues/1849) `引入特性`
+* [特定情况下工具栏图标无法正常加载](https://github.com/Vanessa219/vditor/issues/1846) `兼容性`
+* [改进粘贴 markdown 导致的 XSS](https://github.com/Vanessa219/vditor/issues/1827) `改进功能`
+* [支持西班牙语和越南语](https://github.com/Vanessa219/vditor/pull/1828) `引入特性`
+* [支持粘贴含有图文的 Word](https://github.com/Vanessa219/vditor/pull/1830) `引入特性`
+* [改进列表内粘贴列表](https://github.com/Vanessa219/vditor/issues/1832) `改进功能`
+
+### v3.11.1 / 2025-05-27
+
+* [支持德语](https://github.com/Vanessa219/vditor/pull/1816) `文档相关`
+* [订正多语言（英语）中的 `delete-column` 和 `delete-row`](https://github.com/Vanessa219/vditor/pull/1811) `文档相关`
+* [更新 LICENSE](https://github.com/Vanessa219/vditor/pull/1812) `文档相关`
+* [添加 `options.upload.xhr` 回调](https://github.com/Vanessa219/vditor/issues/1808) `引入特性`
+* [待办列表回车换行错误](https://github.com/Vanessa219/vditor/issues/1789) `修复缺陷`
+
+### v3.11.0 / 2025-04-09
+
+* [添加 `options.upload.cancel` 回调](https://github.com/Vanessa219/vditor/issues/1791) `引入特性`
+* [修复代码行号对不齐](https://github.com/Vanessa219/vditor/issues/1786) `修复缺陷`
+* [mermaid 升级至 11.6.0](https://github.com/Vanessa219/vditor/issues/1140) `开发重构`
+* [初始化后立即 `destroy` 不再进行 `after` 的回调](https://github.com/Vanessa219/vditor/issues/1790) `改进功能`
+* [点击复制按钮不展开编辑区域](https://github.com/Vanessa219/vditor/issues/1768) `改进功能`
+* [添加 `unSelect` 回调](https://github.com/Vanessa219/vditor/pull/1775) `改进功能`
+
+### v3.10.9 / 2025-02-11
+
+* [任务列表中的无序列表回车异常](https://github.com/Vanessa219/vditor/issues/1754) `修复缺陷`
+* [添加 `insertEmptyBlock` 方法](https://github.com/Vanessa219/vditor/pull/1745) `开发重构`
 * [撤销后图表会重复](https://github.com/Vanessa219/vditor/issues/1738) `修复缺陷`
 * [设置 defaultLang 之后，指定代码失效](https://github.com/Vanessa219/vditor/issues/1728) `修复缺陷`
 

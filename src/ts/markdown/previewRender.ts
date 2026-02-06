@@ -75,6 +75,8 @@ export const md2html = (mdText: string, options?: IPreviewOptions) => {
             mathBlockPreview: mergedOptions.markdown.mathBlockPreview,
             paragraphBeginningSpace: mergedOptions.markdown.paragraphBeginningSpace,
             sanitize: mergedOptions.markdown.sanitize,
+            sub: mergedOptions.markdown.sub,
+            sup: mergedOptions.markdown.sup,
             toc: mergedOptions.markdown.toc,
         });
         if (options?.renderers) {
@@ -99,7 +101,7 @@ export const previewRender = async (previewElement: HTMLDivElement, markdown: st
     previewElement.classList.add("vditor-reset");
 
     if (!mergedOptions.i18n) {
-        if (!["en_US", "fr_FR", "pt_BR", "ja_JP", "ko_KR", "ru_RU", "sv_SE", "zh_CN", "zh_TW"].includes(mergedOptions.lang)) {
+        if (!["de_DE", "en_US", "es_ES", "fr_FR", "ja_JP", "ko_KR", "pt_BR", "ru_RU", "sv_SE", "vi_VN", "zh_CN", "zh_TW"].includes(mergedOptions.lang)) {
             throw new Error(
                 "options.lang error, see https://ld246.com/article/1549638745630#options",
             );

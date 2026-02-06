@@ -35,12 +35,13 @@ import {afterRenderEvent} from "./ts/wysiwyg/afterRenderEvent";
 import {WYSIWYG} from "./ts/wysiwyg/index";
 import {input} from "./ts/wysiwyg/input";
 import {renderDomByMd} from "./ts/wysiwyg/renderDomByMd";
-import {execAfterRender} from "./ts/util/fixBrowserBehavior";
+import {execAfterRender, insertEmptyBlock} from "./ts/util/fixBrowserBehavior";
 import {accessLocalStorage} from "./ts/util/compatibility";
 
 class Vditor extends VditorMethod {
     public readonly version: string;
     public vditor: IVditor;
+    private isDestroyed = false;
 
     /**
      * @param id 要挂载 Vditor 的元素或者元素 ID。
@@ -58,7 +59,7 @@ class Vditor extends VditorMethod {
                     },
                 };
             } else if (!options.cache) {
-                options.cache = {id: `vditor${id}`};
+                options.cache = { id: `vditor${id}` };
             } else if (!options.cache.id) {
                 options.cache.id = `vditor${id}`;
             }
@@ -74,7 +75,7 @@ class Vditor extends VditorMethod {
 
         // 支持自定义国际化
         if (!mergedOptions.i18n) {
-            if (!["en_US", "fr_FR", "pt_BR", "ja_JP", "ko_KR", "ru_RU", "sv_SE", "zh_CN", "zh_TW"].includes(mergedOptions.lang)) {
+            if (!["de_DE", "en_US", "es_ES", "fr_FR", "ja_JP", "ko_KR", "pt_BR", "ru_RU", "sv_SE", "vi_VN", "zh_CN", "zh_TW"].includes(mergedOptions.lang)) {
                 throw new Error(
                     "options.lang error, see https://ld246.com/article/1549638745630#options",
                 );
@@ -101,7 +102,7 @@ class Vditor extends VditorMethod {
     private showErrorTip(error: string) {
         const tip = new Tip();
         document.body.appendChild(tip.element);
-        tip.show(error, 0)
+        tip.show(error, 0);
     }
 
     public updateToolbarConfig(options: IToolbarConfig) {
@@ -353,6 +354,11 @@ class Vditor extends VditorMethod {
         }
     }
 
+    /** 空块 */
+    public insertEmptyBlock(position: InsertPosition) {
+        insertEmptyBlock(this.vditor, position);
+    }
+
     /** 清空 undo & redo 栈 */
     public clearStack() {
         this.vditor.undo.clearStack(this.vditor);
@@ -364,7 +370,7 @@ class Vditor extends VditorMethod {
         this.vditor.element.innerHTML = this.vditor.originalInnerHTML;
         this.vditor.element.classList.remove("vditor");
         this.vditor.element.removeAttribute("style");
-        const iconScript = document.getElementById("vditorIconScript")
+        const iconScript = document.getElementById("vditorIconScript");
         if (iconScript) {
             iconScript.remove();
         }
@@ -372,6 +378,8 @@ class Vditor extends VditorMethod {
 
         UIUnbindListener();
         this.vditor.wysiwyg.unbindListener();
+        this.vditor.options.after = undefined;
+        this.isDestroyed = true;
     }
 
     /** 获取评论 ID */
@@ -478,6 +486,9 @@ class Vditor extends VditorMethod {
     }
 
     private init(id: HTMLElement, mergedOptions: IOptions) {
+        if (this.isDestroyed) {
+            return;
+        }
         this.vditor = {
             currentMode: mergedOptions.mode,
             element: id,
@@ -532,6 +543,8 @@ class Vditor extends VditorMethod {
                 paragraphBeginningSpace: this.vditor.options.preview.markdown
                     .paragraphBeginningSpace,
                 sanitize: this.vditor.options.preview.markdown.sanitize,
+                sub: this.vditor.options.preview.markdown.sub,
+                sup: this.vditor.options.preview.markdown.sup,
                 toc: this.vditor.options.preview.markdown.toc,
             });
 

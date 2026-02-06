@@ -20,6 +20,10 @@ Easy-to-use Markdown editor, born to adapt to different application scenarios
 <a href="https://github.com/Vanessa219/vditor/blob/master/README.md">中文</a> &nbsp;|&nbsp; <a href="https://b3log.org/vditor/demo/index.html">Demo</a>
 </p>
 
+<p align="center">
+🔥 Welcome to check out our other open source project <a href="https://github.com/siyuan-note/siyuan">SiYuan</a>
+<p>
+
 ## 💡 Introduction
 
 [Vditor](https://b3log.org/vditor) is a browser-side Markdown editor, Support WYSIWYG, instant rendering (similar to Typora) and split-screen preview mode. It is implemented using TypeScript and supports native JavaScript and frameworks such as Vue, React, Angular, and Svelte..
@@ -177,14 +181,15 @@ Can be filled with element `id` or element itself` HTMLElement`
 | minHeight | Editing area minimum height | - |
 | width | Total editor width, supports % | 'auto' |
 | placeholder | Tips when the input area is empty | '' |
-| lang | I18n type: en_US, fr_FR, pt_BR, ja_JP, ko_KR, ru_RU, sv_SE, zh_CN, zh_TW | 'zh_CN' |
-| input | Trigger after input (value: string) | - |
-| focus | Trigger after focusing (value: string) | - |
-| blur | Trigger after out of focus (value: string) | - |
+| lang | I18n type: de_DE, en_US, es_ES, fr_FR, ja_JP, ko_KR, pt_BR, ru_RU, sv_SE, vi_VN, zh_CN, zh_TW | 'zh_CN' |
+| input(value: string) | Trigger after input  | - |
+| focus(value: string) | Trigger after focusing | - |
+| blur(value: string) | Trigger after out of focus | - |
 | keydown(event: KeyboardEvent) | Trigger after keydown | - |
-| esc | Trigger after pressing <kbd>esc</kbd> (value: string) | - |
-| ctrlEnter | Trigger after pressing <kbd>⌘/ctrl+enter</kbd> (value: string) | - |
-| select | Triggered after selecting text in the editor (value: string) | - |
+| esc(value: string) | Trigger after pressing | - |
+| ctrlEnter(value: string) | Trigger after pressing <kbd>⌘/ctrl+enter</kbd> | - |
+| select(value: string) | Triggered after selecting text in the editor | - |
+| unSelect() | Triggered after un selecting text in the editor | - |
 | tab | <kbd>tab</kbd> key operation string, support `\ t` and any string | - |
 | typewriterMode | Whether to enable typewriter mode | false |
 | cdn | Configure self-built CDN address | `https://unpkg.com/vditor@${VDITOR_VERSION}` |
@@ -194,6 +199,7 @@ Can be filled with element `id` or element itself` HTMLElement`
 | theme | Theme: classic, dark | 'classic' |
 | icon | icon theme: ant, material | 'ant' |
 | customRenders: {language: string, render: (element: HTMLElement, vditor: IVditor) => void}[] | Custom render | [] |
+| customWysiwygToolbar(type: TWYSISYGToolbar, element: HTMLElement): void | Customizing the toolbar in wysiwyg mode | - |
 
 #### options.toolbar
 
@@ -312,6 +318,8 @@ new Vditor('vditor', {
 | linkBase | link relative path prefix | '' |
 | linkPrefix | link prefix | '' |
 | mark | enable mark tag | false |
+| sup | superscript | false |
+| sub | subscript | false |
 
 #### options.preview.math
 
@@ -417,6 +425,7 @@ xhr.send(JSON.stringify({url: src})); // src is the address of the image outside
 
 |   | Explanation | Default |
 | - | - | - |
+| xhr | XMLHttpRequest used when uploading | - |
 | url | Upload url, empty will not trigger upload related events | '' |
 | max | The largest upload file Byte | 10 * 1024 * 1024 |
 | linkToImgUrl | When the clipboard contains the image address, use this url to re-upload | '' |
@@ -433,6 +442,7 @@ xhr.send(JSON.stringify({url: src})); // src is the address of the image outside
 | handler(files: File[]) => string \| null \| Promise<string> \| Promise<null> | Custom upload, return error message when an error occurs | - |
 | format | Transform the data returned by the server to meet the built-in data structure (files: File[], responseText: string): string | - |
 | file(files: File[]): File[] \| Promise<File[]> | Process the uploaded file before return. | - |
+| cancel(files: File[]): void | Cancel uploading a file. | - |
 | setHeaders | Use the return value to set the header before uploading (): { [key: string]: string } | - |
 | extraData | Append data to FormData { [key: string]: string | Blob } | - |
 | multiple | Allow multiple file uploads | true |
@@ -500,6 +510,7 @@ xhr.send(JSON.stringify({url: src})); // src is the address of the image outside
 | unHlCommentIds(ids: string[]) | Cancel highlight comment by Ids |
 | removeCommentIds(removeIds: string[]) | Remove comment by Ids |
 | updateToolbarConfig(config: {hide?: boolean, pin?: boolean}) | Update toolbar config |
+| insertEmptyBlock(position: InsertPosition) | Insert empty block |
 
 #### static methods
 

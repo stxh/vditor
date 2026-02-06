@@ -20,6 +20,10 @@
 <a href="https://github.com/Vanessa219/vditor/blob/master/README_en_US.md">English</a> &nbsp;|&nbsp; <a href="https://b3log.org/vditor/demo/index.html">Demo</a>
 </p>
 
+<p align="center">
+🔥 欢迎观摩我们的另一个开源项目 <a href="https://github.com/siyuan-note/siyuan">思源笔记</a>
+<p>
+
 ## 💡 简介
 
 [Vditor](https://b3log.org/vditor) 是一款浏览器端的 Markdown 编辑器，支持所见即所得、即时渲染（类似 Typora）和分屏预览模式。它使用 TypeScript 实现，支持原生 JavaScript 以及 Vue、React、Angular 和 Svelte 等框架。
@@ -201,7 +205,7 @@ Markdown 输出的 HTML 所展现的外观。内置 ant-design, light，dark，w
 | minHeight | 编辑区域最小高度 | - |
 | width | 编辑器总宽度，支持 % | 'auto' |
 | placeholder | 输入区域为空时的提示 | '' |
-| lang | 语言种类：en_US, fr_FR, pt_BR, ja_JP, ko_KR, ru_RU, sv_SE, zh_CN, zh_TW | 'zh_CN' |
+| lang | 语言种类：de_DE, en_US, es_ES, fr_FR, ja_JP, ko_KR, pt_BR, ru_RU, sv_SE, vi_VN, zh_CN, zh_TW | 'zh_CN' |
 | input(value: string) | 输入后触发  | - |
 | focus(value: string) | 聚焦后触发 | - |
 | blur(value: string) | 失焦后触发 | - |
@@ -209,6 +213,7 @@ Markdown 输出的 HTML 所展现的外观。内置 ant-design, light，dark，w
 | esc(value: string) | <kbd>esc</kbd> 按下后触发 | - |
 | ctrlEnter(value: string) | <kbd>⌘/ctrl+enter</kbd> 按下后触发 | - |
 | select(value: string) | 编辑器中选中文字后触发 | - |
+| unSelect() | 编辑器中未选中文字后触发 | - |
 | tab | <kbd>tab</kbd> 键操作字符串，支持 `\t` 及任意字符串 | - |
 | typewriterMode | 是否启用打字机模式 | false |
 | cdn | 配置自建 CDN 地址 | `https://unpkg.com/vditor@${VDITOR_VERSION}` |
@@ -218,6 +223,7 @@ Markdown 输出的 HTML 所展现的外观。内置 ant-design, light，dark，w
 | theme | 主题：classic, dark | 'classic' |
 | icon | 图标风格：ant, material | 'ant' |
 | customRenders: {language: string, render: (element: HTMLElement, vditor: IVditor) => void}[] | 自定义渲染器 | [] |
+| customWysiwygToolbar(type: TWYSISYGToolbar, element: HTMLElement): void | 对 wysiwyg 模式下的工具栏进行自定义 | - |
 
 #### options.toolbar
 
@@ -328,6 +334,8 @@ new Vditor('vditor', {
 | linkBase | 链接相对路径前缀 | '' |
 | linkPrefix | 链接强制前缀 | '' |
 | mark | 启用 mark 标记 | false |
+| sup | 上标 | false |
+| sub | 下标 | false |
 
 #### options.preview.theme
 
@@ -464,6 +472,7 @@ if (xhr.status === 200) {
 
 |   | 说明 | 默认值 |
 | - | - | - |
+| xhr | 上传时使用的 XMLHttpRequest | - |
 | url | 上传 url，为空则不会触发上传相关事件 | '' |
 | max | 上传文件最大 Byte | 10 * 1024 * 1024 |
 | linkToImgUrl | 剪切板中包含图片地址时，使用此 url 重新上传 | '' |
@@ -480,6 +489,7 @@ if (xhr.status === 200) {
 | handler(files: File[]) => string \| null \| Promise<string> \| Promise<null> | 自定义上传，当发生错误时返回错误信息 | - |
 | format(files: File[], responseText: string): string | 对服务端返回的数据进行转换，以满足内置的数据结构 | - |
 | file(files: File[]): File[] \| Promise<File[]> | 将上传的文件处理后再返回 | - |
+| cancel(files: File[]): void | 取消正在上传的文件 | - |
 | setHeaders(): { [key: string]: string } | 上传前使用返回值设置头 | - |
 | extraData: { [key: string]: string \| Blob } | 为 FormData 添加额外的参数 | - |
 | multiple | 上传文件是否为多个 | true |
@@ -547,6 +557,7 @@ if (xhr.status === 200) {
 | unHlCommentIds(ids: string[]) | 取消评论高亮 |
 | removeCommentIds(removeIds: string[]) | 删除评论 |
 | updateToolbarConfig(config: {hide?: boolean, pin?: boolean}) | 更新工具栏配置 |
+| insertEmptyBlock(position: InsertPosition) | 插入空快 |
 
 #### static methods
 
